@@ -1,5 +1,8 @@
+const dotenv = require("dotenv")
+dotenv.config()
 const mongoose = require('mongoose');
-const uri = "mongodb+srv://Anurag:iamasinger@cluster0.kfq24bw.mongodb.net/gofoodmern?retryWrites=true&w=majority&appName=Cluster0"
+//Create your own .env file in backend and then write Uri="your uri link" and save it
+const uri = process.env.Uri 
 const mongoDB = async () => {
     await mongoose.connect(uri).then(async () => {
         console.log('Connected Database')
@@ -9,8 +12,8 @@ const mongoDB = async () => {
         // console.log(fooditems)
         global.foodCategory = await fetched_data2.find({}).toArray();
         // console.log(catData)
-    }).catch((err) => {
-        console.log(err);
+    }).catch((error) => {
+        console.log("MongoDb Connection Error: ", error.message);
     })
 }
 
